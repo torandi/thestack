@@ -1,0 +1,33 @@
+.input {
+	float: left;
+	margin-right: 20px;
+}
+
+.input label {
+	display: block;
+	font-weight: bold;
+}
+
+#person, #with {
+	width: 120px;
+}
+
+#sum {
+	width: 70px;
+}
+
+#store {
+	width: 160px;
+}
+
+.two_input {
+	width: 20px;
+}
+
+#year {
+	width: 50px;
+}
+
+.clear {
+	clear: both;
+}

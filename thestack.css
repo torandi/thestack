@@ -31,3 +31,13 @@
 .clear {
 	clear: both;
 }
+
+thead a {
+	color: #006498;
+}
+
+tbody a {
+	color: #333333;
+}
+
+

@@ -30,3 +30,12 @@ function output_json($data) {
 	echo json_encode($data);
 	exit();
 }
+
+function filter_link($text, $options = array()) {
+	global $filter;
+	if($filter == NULL) {
+		$filter = array();
+	}
+	$res = array_merge($filter, $options);
+	return "<a href='index.php?".http_build_query($res)."'>$text</a>";
+}

@@ -10,15 +10,6 @@ if($filter) {
 	$purchases = Purchase::selection();
 }
 
-function filter_link($text, $options = array()) {
-	global $filter;
-	if($filter == NULL) {
-		$filter = array();
-	}
-	$res = array_merge($filter, $options);
-	return "<a href='index.php?".http_build_query($res)."'>$text</a>";
-}
-
 function sort_link($text, $what) {
 	return filter_link($text, array('@order'=>$what));
 }

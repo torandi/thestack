@@ -83,7 +83,7 @@ var persons = [
 				</div>
 				<? } else { ?>
 				<p id="reset">
-				<a href="index.php">Reset filter</a>
+				<a href="index.php">Återställer filter</a>
 				</p>
 				<? } ?>
 			<table class="table">

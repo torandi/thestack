@@ -12,6 +12,10 @@ class Purchase extends ValidatingBasicObject {
 
 	}
 
+	public function timestamp() {
+		return strtotime($this->date);
+	}
+
 	public function by_name() {
 		return $this->Person()->name;
 	}

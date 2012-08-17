@@ -31,6 +31,7 @@ $(function() {
 		$(this).attr("data-prev",$(this).val());
 		if(prev_val != $(this).val() && $(this).val().length == 2) {
 			next.focus();
+			next.select();
 		}
 	})
 
@@ -42,6 +43,7 @@ $(function() {
 		$(this).attr("data-prev",$(this).val());
 		if(prev_val != $(this).val() && $(this).val().length == 4) {
 			next.focus();
+			next.select();
 		}
 	})
 

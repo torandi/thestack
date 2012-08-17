@@ -26,9 +26,9 @@ if($action == "stores") {
 	$data['person_id'] = $person->id;
 
 	if(!empty($data['with'])) {
-		$with = Person::one(array('name'=>$data['person']));
+		$with = Person::one(array('name'=>$data['with']));
 		if($with == NULL) {
-			output_json(array('status'=>1, 'msg'=>"Kunde inte hitta {$data['person']}"));
+			output_json(array('status'=>1, 'msg'=>"Kunde inte hitta {$data['with']}"));
 		}
 		$with_id = $with->id;
 	} else {

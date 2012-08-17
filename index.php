@@ -20,9 +20,9 @@ function sort_link($text, $what) {
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<title>The Stack</title>
-		<script src="jquery.js" type="text/javascript"></script>
-		<script src="jquery.ui.js" type="text/javascript"></script>
-		<script src="thestack.js" type="text/javascript"></script>
+		<script src="js/jquery.js" type="text/javascript"></script>
+		<script src="js/jquery.ui.js" type="text/javascript"></script>
+		<script src="js/thestack.js" type="text/javascript"></script>
 		<link type="text/css" rel="stylesheet" href="bootstrap.min.css" />
 		<link type="text/css" rel="stylesheet" href="thestack.css" />
 		<link type="text/css" rel="stylesheet" href="ui-lightness/jquery-ui-1.8.22.custom.css" />
@@ -40,6 +40,9 @@ var persons = [
 		<div class"row" style="margin-top: 10px">
 			<div class="span12">
 				<h1>The Stack</h1>
+				<p>
+					<a href="stats.php">Statistik</a>
+				</p>
 				<div id="error" class="alert alert-error" style="display:none;"></div>
 				<? if(!$filter) { ?>
 				<div class="well">

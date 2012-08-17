@@ -44,6 +44,7 @@ var persons = [
 					<a href="stats.php">Statistik</a>
 				</p>
 				<div id="error" class="alert alert-error" style="display:none;"></div>
+				<div id="msg" class="alert alert-success" style="display:none;"></div>
 				<? if(!$filter) { ?>
 				<div class="well">
 					<form id="add" class="form-inline">
@@ -97,6 +98,7 @@ var persons = [
 						<th><?=sort_link("Datum", "date")?></th>
 						<th>Med</th>
 						<th><?=sort_link("Summa", "sum")?></th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody id="purchases">

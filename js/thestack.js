@@ -59,12 +59,30 @@ $(function() {
 		}, function(data) {
 			if($.isPlainObject(data) && data.status == 1) {
 				$("#error").html(data.msg);
-				$("#error").fadeIn('slow').delay(7000).fadeOut('slow');
+				$("#error").fadeIn('slow').delay(5000).fadeOut('slow');
 			} else {
 				$("#purchases").prepend(data);
 				$("#purchases tr:first").fadeIn('slow');
 				$("#person").focus();
 				$("#person").select();
+			}
+		});
+		return false
+	});
+
+	$(".delete_row").live('click',function(event) {
+		var row = $(this).closest('.purchase_row');
+		$.post("backend.php", {
+			action: 'delete', 
+			id: $(this).attr("data-id")
+		}, function(data) {
+			if(data.status == 1) {
+				$("#error").html(data.msg);
+				$("#error").fadeIn('slow').delay(5000).fadeOut('slow');
+			} else {
+				$("#msg").html(data.msg);
+				$("#msg").fadeIn('slow').delay(5000).fadeOut('slow');
+				row.fadeOut();
 			}
 		});
 		return false

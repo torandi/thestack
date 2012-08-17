@@ -16,6 +16,23 @@ if($action == "stores") {
 		$stores[] = $store->name;
 	}
 	output_json($stores);
+} else if($action == 'delete') {
+	$purchase = Purchase::from_id($_REQUEST['id']);
+	$result = array();
+	if($purchase) {
+		try {
+			$purchase->delete();
+			$result['status'] = 0;
+			$result['msg'] = "Inköpet raderades";
+		} catch (Exception $e) {
+			$result['status'] = 1;
+			$result['msg'] = "Kunde inte radera inköpet: " . $e->getMessage();
+		}
+	} else {
+		$result['status'] = 1;
+		$result['msg'] = "Kunde inte hitta inköp med id " . $_REQUEST['id'];
+	}
+	output_json($result);
 } else if($action == 'add') {
 	$data = $_REQUEST['data'];
 	$person = Person::one(array('name'=>$data['person']));

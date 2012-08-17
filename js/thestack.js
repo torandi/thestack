@@ -73,6 +73,8 @@ $(function() {
 	});
 
 	$(".delete_row").live('click',function(event) {
+		if(!confirm("Radera inköpet?"))
+			return false;
 		var row = $(this).closest('.purchase_row');
 		$.post("backend.php", {
 			action: 'delete', 

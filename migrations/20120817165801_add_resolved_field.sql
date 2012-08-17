@@ -1,0 +1,1 @@
+ALTER TABLE `purchases` ADD `resolved` BOOLEAN NOT NULL DEFAULT '0'

@@ -81,6 +81,11 @@ include "includes.php";
 			];
 			var g1_options = {
 				xaxis: { mode: "time", },
+				legend: { 
+					show: true,
+					position: "nw"
+				}
+					
 			};
 			$.plot($("#graph1"), g1_data, g1_options);
 		</script>

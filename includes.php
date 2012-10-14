@@ -1,7 +1,7 @@
 <?php
 $repo_root=dirname(__FILE__);
 
-define('HTML_ACCESS', true);
+define('HTML_ACCESS', false);
 
 include "settings.php";
 include "functions.php";

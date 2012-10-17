@@ -30,7 +30,7 @@ class Purchase extends ValidatingBasicObject {
 		return Person::from_id($this->with_id);
 	}
 
-	public static function calculate_debts() {
+	public static function calculate_debts($selection = array('resolved:null'=>null)) {
 		$total_participate = array();
 		$total_payed = array();
 
@@ -44,7 +44,7 @@ class Purchase extends ValidatingBasicObject {
 		$total_num_persons = count($persons);
 
 
-		foreach(Purchase::selection(array('resolved' => false)) as $purchase) {
+		foreach(Purchase::selection($selection) as $purchase) {
 			$num_persons = ($purchase->with_id == NULL) ? $total_num_persons : 2;
 			$each_sum = $purchase->sum / $num_persons;
 			if($purchase->with_id == NULL) {
@@ -69,5 +69,17 @@ class Purchase extends ValidatingBasicObject {
 			'payed' => $total_payed,
 			'result' => $result
 		);
+	}
+
+	/**
+	* This resolves all currently unresolved purchases
+	*/
+	public static function resolve_all_unresolved() {
+		global $db;
+		$stmt = $db->prepare("UPDATE purchases SET resolved=NOW() WHERE resolved IS NULL");
+		if(!$stmt->execute()) {
+			throw new Exception("Internal error, failed to update all purchases:\n<pre>".$stmt->error.'</pre>', $stmt->errno);
+		}
+		$stmt->close();
 	}
 }

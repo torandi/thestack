@@ -2,6 +2,13 @@
 
 include "includes.php";
 
+$msg = "";
+
+if(post('resolve') == "do") {
+	Purchase::resolve_all_unresolved();
+	$msg = "<span class='alert alert-success'>Inköpen markerade som lösta</span>";
+}
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="sv" lang="sv">
@@ -19,37 +26,43 @@ include "includes.php";
 	</head>
 	<body>
 	<div class"row" style="margin-top: 10px">
+		<?=$msg?>
 		<div class="span12">
-		<h2>Summering</h2>
+		<h1>Summering</h1>
 		<p>
 			<a href="index.php">Lägg till nya</a>
-		</p>
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Person</th>
-					<th>Total matkostnad</th>
-					<th>Totala utlägg</th>
-					<th>Resultat</th>
-				</tr>
-			</thead>
-			<tbody>
-				<?
-					$result = Purchase::calculate_debts();
-					foreach(Person::selection() as $person) {
-						$r =  round($result['result'][$person->id],2);
-						?>
-						<tr>
-							<td><?= $person->name ?></td>
-							<td><?= round($result['participate'][$person->id],2) ?> kr</td>
-							<td><?= round($result['payed'][$person->id],2) ?> kr</td>
-							<td class="result <?= $r == 0 ? 'neutral' : ( $r < 0 ? 'negative' : 'positive' )?>"><?= $r ?></td>
-						</tr>
-						<?
-					}
-				?>
-			</tbody>
-		</table>
+			</p>
+
+		<h2>Olösta inköp</h2>
+		<? 
+			$result = Purchase::calculate_debts();
+			include "partials/purchase_table.php";
+		?>
+		<form method="post" action="" id="resolve_form">
+			<input type="hidden" name="resolve" value="do"/>
+			<a href="#" id="resolve_link">Markera alla inköp som lösta</a>
+		</form>
+		<hr/>
+
+		<h2>Alla inköp</h2>
+		<p>
+			<a href="index.php">Lägg till nya</a>
+			</p>
+
+		<? 
+			$result = Purchase::calculate_debts(array());
+			include "partials/purchase_table.php";
+		?>
+
+					<script type="text/javascript">
+						$("#resolve_link").click(function() {
+							if(confirm("Är du säker på att du vill markera samtliga inköp som lösta?")) {
+								$("#resolve_form").submit();
+							}
+							return false;
+
+						});
+					</script>
 
 		<!-- BEGIN graphs -->
 		<h4>Summa inköp per person över tid</h4>
